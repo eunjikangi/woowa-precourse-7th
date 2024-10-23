@@ -1,11 +1,8 @@
 class Calculator {
   numArr;
 
-  result;
-
   constructor(numArr) {
     this.numArr = numArr;
-    this.result = BigInt(0);
   }
 
   addAllNum() {

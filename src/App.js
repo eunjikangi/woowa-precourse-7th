@@ -2,28 +2,26 @@ import { Console } from '@woowacourse/mission-utils';
 import NumberExtractor from './NumberExtractor.js';
 import Calculator from './Calculator.js';
 
-function generateError(errorMsg) {
-  throw new Error(`[ERROR] ${errorMsg}`);
-}
-
-function isEmpty(string) {
-  return !!(string === null || string === undefined);
-}
-
-async function getUserInputData() {
-  const userInputData = await Console.readLineAsync(
-    '덧셈할 문자열을 입력해 주세요.\n',
-  );
-  if (isEmpty(userInputData) === true)
-    generateError('입력 오류가 발생했습니다.');
-  return userInputData;
-}
-
 class App {
-  async run() {
-    const userInput = await getUserInputData();
+  userInputData;
 
-    const numberExtractor = new NumberExtractor(userInput);
+  isEmpty() {
+    return !!(this.userInputData === null || this.userInputData === undefined);
+  }
+
+  async getUserInputData() {
+    this.userInputData = await Console.readLineAsync(
+      '덧셈할 문자열을 입력해 주세요.\n',
+    );
+
+    if (this.isEmpty() === true)
+      throw new Error(`[ERROR] 입력 오류가 발생했습니다.`);
+  }
+
+  async run() {
+    await this.getUserInputData();
+
+    const numberExtractor = new NumberExtractor(this.userInputData);
     const numArr = numberExtractor.extractNumber();
 
     const calcultor = new Calculator(numArr);
