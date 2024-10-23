@@ -3,7 +3,7 @@ import NumberExtractor from './NumberExtractor.js';
 import Calculator from './Calculator.js';
 
 function generateError(errorMsg) {
-  // throw new Error(`[ERROR] ${errorMsg}`);
+  throw new Error(`[ERROR] ${errorMsg}`);
 }
 
 function isEmpty(string) {
@@ -15,8 +15,8 @@ async function getUserInputData() {
     '덧셈할 문자열을 입력해 주세요.\n',
   );
   if (isEmpty(userInputData) === true)
-    // generateError('입력 오류가 발생했습니다.');
-    return userInputData;
+    generateError('입력 오류가 발생했습니다.');
+  return userInputData;
 }
 
 class App {
